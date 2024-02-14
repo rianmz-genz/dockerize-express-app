@@ -26,21 +26,21 @@ router.get('/', async (req, res) => {
     const sortField = req.query.sortField || 'id'; // Default to sorting by ID
     const orderBy = { [sortField]: sortOrder };
 
-    const meta = {
+    const metaFilter = {
       offset,
       pageSize,
       filterQuery,
       orderBy,
     };
 
-    const products = await getAllProducts(meta);
+    const { products, metadata } = await getAllProducts(metaFilter);
 
     return res
       .json({
         data: products,
         message: 'Success get all products',
         status: true,
-        meta,
+        meta: metadata,
       })
       .status(200);
   } catch (error) {

@@ -13,6 +13,11 @@ const findProductById = async ({ id }) => {
   return product;
 };
 
+const countProducts = async () => {
+  const count = await prisma.product.count()
+  return count
+}
+
 const findProducts = async ({ offset, pageSize, filterQuery, orderBy }) => {
   const products = await prisma.product.findMany({
     skip: offset,
@@ -80,4 +85,5 @@ module.exports = {
   deleteProductById,
   updateProductById,
   findProductById,
+  countProducts
 };

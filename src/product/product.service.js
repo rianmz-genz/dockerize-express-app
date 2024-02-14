@@ -4,6 +4,7 @@ const {
   deleteProductById,
   findProductById,
   updateProductById,
+  countProducts,
 } = require('./product.repository');
 
 const getAllProducts = async ({ offset, pageSize, filterQuery, orderBy }) => {
@@ -17,8 +18,16 @@ const getAllProducts = async ({ offset, pageSize, filterQuery, orderBy }) => {
   if (products.length == 0) {
     throw Error('Product is empty');
   }
+  const totalProducts = await countProducts(); // Menghitung total produk sesuai dengan filterQuery
 
-  return products;
+  const metadata = {
+    totalProducts,
+    limit: pageSize,
+    currentPage: Math.floor(offset / pageSize) + 1,
+    totalPages: Math.ceil(totalProducts / pageSize),
+  };
+
+  return { products, metadata };
 };
 
 const getProductById = async ({ id }) => {
