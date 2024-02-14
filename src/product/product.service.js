@@ -15,7 +15,7 @@ const getAllProducts = async ({ offset, pageSize, filterQuery, orderBy }) => {
   });
 
   if (products.length == 0) {
-    throw Error('Product is emptyaaa');
+    throw Error('Product is empty');
   }
 
   return products;

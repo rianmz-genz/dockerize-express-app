@@ -1,5 +1,5 @@
 const prisma = require('../database');
-
+const { v4: uuidv4 } = require('uuid');
 const findProductById = async ({ id }) => {
   const product = await prisma.product.findFirst({
     where: {
@@ -24,13 +24,18 @@ const findProducts = async ({ offset, pageSize, filterQuery, orderBy }) => {
 };
 
 const createProduct = async ({ name, price }) => {
-  const newProduct = await prisma.product.create({
-    data: {
-      name,
-      price,
-    },
-  });
-  return newProduct;
+  try {
+    const newProduct = await prisma.product.create({
+      data: {
+        id: uuidv4(),
+        name,
+        price,
+      },
+    });
+    return newProduct;
+  } catch (error) {
+    throw Error(error);
+  }
 };
 
 const deleteProductById = async ({ id }) => {
