@@ -1,19 +1,16 @@
 version: '3.8'
 services:
   api:
-    build: ./api
+    build: .
     container_name: api_c
     ports:
       - '4000:4000'
     volumes:
-      - ./api:/app
+      - .:/app
       - /app/node_modules
+    networks:
+      - dockernet
 
-  myblog:
-    build: ./myblog
-    container_name: myblog_c
-    ports:
-      - '3001:3000'
-    volumes:
-      - ./myblog:/app
-      - /app/node_modules
+networks:
+  dockernet:
+    external: true

@@ -1,0 +1,25 @@
+GET http://localhost:4000/products
+
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+
+{
+    "name": "cobaa",
+    "price": 1000
+}
+
+###
+DELETE http://localhost:4000/products/1
+
+###
+GET http://localhost:4000/products/3
+
+###
+PUT http://localhost:4000/products/3
+Content-Type: application/json
+
+{
+    "name": "cobaa3",
+    "price": 1000
+}
