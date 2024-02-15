@@ -77,7 +77,7 @@ router.post('/', productValidation, userMiddleware, async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  const productId = parseInt(req.params.id);
+  const productId = req.params.id;
   if (!productId) {
     return res
       .json({
@@ -103,7 +103,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  const productId = parseInt(req.params.id);
+  const productId = req.params.id;
   if (!productId) {
     return res
       .json({
@@ -129,7 +129,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.put('/:id', productValidation, async (req, res) => {
-  const productId = parseInt(req.params.id);
+  const productId = req.params.id;
   const reqBody = req.body;
 
   if (!productId) {

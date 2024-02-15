@@ -17,10 +17,10 @@ DELETE http://localhost:4000/products/2
 GET http://localhost:4000/products/3
 
 ###
-PUT http://localhost:4000/products/3
+PUT http://localhost:4000/products/38951426-debc-4654-a694-e47010a9dcca
 Content-Type: application/json
 
 {
-    "name": "cobaa3",
+    "name": "cobaa31",
     "price": 1000
 }
