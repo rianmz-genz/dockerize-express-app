@@ -1,0 +1,26 @@
+GET http://localhost:4000/products
+
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+Authorization: eyJ1c2VyIjp7ImlkIjoiMGZmZGM5ZWUtYzAwZi00YWRmLWJkODYtMjg4ZTI3MjViOTZlIiwiZW1haWwiOiJjb2JhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJGVKWGxHR1lpaWJYVmh3b2RmeDdOUS5WNGJDNWJZS0wzZXAwU1A0dFdscWFjdk45aTc4MUNxIiwiY3JlYXRlZEF0IjoiMjAyNC0wMi0xNVQwMToyNDozMC42NTVaIn0sImV4cGlyZWRBdCI6MTcwODA1ODA1ODEyOX0=
+
+{
+    "name": "cobaa",
+    "price": 1000
+}
+
+###
+DELETE http://localhost:4000/products/2
+
+###
+GET http://localhost:4000/products/3
+
+###
+PUT http://localhost:4000/products/3
+Content-Type: application/json
+
+{
+    "name": "cobaa3",
+    "price": 1000
+}

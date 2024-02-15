@@ -35,12 +35,13 @@ const getProductById = async ({ id }) => {
   return product;
 };
 
-const createNewProduct = async (reqBody) => {
+const createNewProduct = async ({ reqBody, userId }) => {
   const name = reqBody.name;
   const price = reqBody.price;
   const newProduct = await createProduct({
     name,
     price,
+    userId,
   });
   return newProduct;
 };
@@ -48,6 +49,11 @@ const createNewProduct = async (reqBody) => {
 const updateProduct = async ({ id, reqBody }) => {
   const name = reqBody.name;
   const price = reqBody.price;
+  try {
+    await findProductById({ id });
+  } catch (error) {
+    throw error;
+  }
   const newProduct = await updateProductById({
     id,
     name,
@@ -57,6 +63,11 @@ const updateProduct = async ({ id, reqBody }) => {
 };
 
 const deleteProduct = async ({ id }) => {
+  try {
+    await findProductById({ id });
+  } catch (error) {
+    throw error;
+  }
   const deletedProduct = await deleteProductById({ id });
   return deletedProduct;
 };

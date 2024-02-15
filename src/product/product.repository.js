@@ -14,9 +14,9 @@ const findProductById = async ({ id }) => {
 };
 
 const countProducts = async () => {
-  const count = await prisma.product.count()
-  return count
-}
+  const count = await prisma.product.count();
+  return count;
+};
 
 const findProducts = async ({ offset, pageSize, filterQuery, orderBy }) => {
   const products = await prisma.product.findMany({
@@ -28,13 +28,14 @@ const findProducts = async ({ offset, pageSize, filterQuery, orderBy }) => {
   return products;
 };
 
-const createProduct = async ({ name, price }) => {
+const createProduct = async ({ name, price, userId }) => {
   try {
     const newProduct = await prisma.product.create({
       data: {
         id: uuidv4(),
         name,
         price,
+        userId,
       },
     });
     return newProduct;
@@ -44,12 +45,6 @@ const createProduct = async ({ name, price }) => {
 };
 
 const deleteProductById = async ({ id }) => {
-  try {
-    await findProductById({ id });
-  } catch (error) {
-    throw error;
-  }
-
   const deletedProduct = await prisma.product.delete({
     where: {
       id,
@@ -60,12 +55,6 @@ const deleteProductById = async ({ id }) => {
 };
 
 const updateProductById = async ({ id, name, price }) => {
-  try {
-    await findProductById({ id });
-  } catch (error) {
-    throw error;
-  }
-
   const updatedProduct = await prisma.product.update({
     where: {
       id,
@@ -85,5 +74,5 @@ module.exports = {
   deleteProductById,
   updateProductById,
   findProductById,
-  countProducts
+  countProducts,
 };

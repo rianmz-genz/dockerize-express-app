@@ -8,6 +8,7 @@ const {
 } = require('./product.service');
 const { validationResult } = require('express-validator');
 const { productValidation } = require('./product.validator');
+const userMiddleware = require('../user/user.middleware');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -51,7 +52,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', productValidation, async (req, res) => {
+router.post('/', productValidation, userMiddleware, async (req, res) => {
   const reqBody = req.body;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -61,7 +62,7 @@ router.post('/', productValidation, async (req, res) => {
     });
   }
   try {
-    const newProduct = createNewProduct(reqBody);
+    const newProduct = createNewProduct({ reqBody, userId: req.user.id });
     return res.json({
       data: newProduct,
       status: true,

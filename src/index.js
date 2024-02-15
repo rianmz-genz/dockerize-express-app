@@ -19,9 +19,12 @@ app.use((req, res, next) => {
   });
   next();
 });
+
 const productController = require('./product/product.controller');
+const userController = require('./user/user.controller');
 
 app.use('/products', productController);
+app.use('/users', userController);
 
 app.listen(runningPort, () => {
   console.log('listening for requests on port ' + runningPort);
