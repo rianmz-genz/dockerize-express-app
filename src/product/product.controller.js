@@ -13,18 +13,15 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    // Pagination
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.pageSize) || 10;
     const offset = (page - 1) * pageSize;
 
-    // Filtering
-    const name = req.query.name || ''; // Assuming filter is a string
+    const name = req.query.name || '';
     const filterQuery = name ? { name: { contains: name } } : {};
 
-    // Sorting
-    const sortOrder = req.query.sortOrder || 'asc'; // Default to ascending
-    const sortField = req.query.sortField || 'id'; // Default to sorting by ID
+    const sortOrder = req.query.sortOrder || 'asc'; 
+    const sortField = req.query.sortField || 'id'; 
     const orderBy = { [sortField]: sortOrder };
 
     const metaFilter = {
